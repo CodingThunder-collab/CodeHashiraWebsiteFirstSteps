@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>lwc:if Tip — Code Hashira</title>
+  <meta name="description" content="LWC tip: replace nested if:true / if:false templates with lwc:if, lwc:elseif and lwc:else for cleaner, faster conditional rendering.">
+  <link rel="icon" href="../assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/js/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="container nav" aria-label="Main">
+      <a class="brand" href="../">
+        <img class="brand-mark" src="../assets/logo.svg" alt="">
+        <span class="brand-text">
+          <span class="brand-name">Code Hashira</span>
+          <span class="brand-tag">Salesforce, Sharpened</span>
+        </span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../#tips">Tips</a></li>
+        <li><a href="../#about">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main" class="container">
+    <article class="article">
+      <a class="back-link" href="../#tips">All tips</a>
+
+      <header class="article-header">
+        <div class="meta">
+          <span class="form-no">TIP #001</span>
+          <span class="tag">LWC</span>
+          <time datetime="2026-09-30">30 Sep 2026</time>
+          <span>2 min read</span>
+        </div>
+        <h1>Clean up LWC templates with lwc:if, lwc:elseif and lwc:else</h1>
+        <p class="lead">
+          Still stacking <code>if:true</code> and <code>if:false</code> templates to show a spinner,
+          an error or your data? There's a cleaner way built into LWC.
+        </p>
+      </header>
+
+      <div class="article-body">
+        <div class="tldr">
+          <strong>TL;DR:</strong> Swap <code>if:true</code> / <code>if:false</code> for
+          <code>lwc:if</code>, <code>lwc:elseif</code> and <code>lwc:else</code>. You get a real
+          if / else-if / else chain, less nesting, and the directives Salesforce now recommends.
+        </div>
+
+        <h2>Before: nested if:true / if:false</h2>
+        <p>
+          A common pattern is loading → error → data. With the legacy directives you need two
+          levels of nesting, and each condition is checked more than once.
+        </p>
+        <pre><code><span class="k">&lt;template</span> if:true={isLoading}<span class="k">&gt;</span>
+    <span class="k">&lt;lightning-spinner</span> alternative-text="Loading"<span class="k">&gt;&lt;/lightning-spinner&gt;</span>
+<span class="k">&lt;/template&gt;</span>
+<span class="k">&lt;template</span> if:false={isLoading}<span class="k">&gt;</span>
+    <span class="k">&lt;template</span> if:true={hasError}<span class="k">&gt;</span>
+        <span class="k">&lt;p&gt;</span>Something went wrong.<span class="k">&lt;/p&gt;</span>
+    <span class="k">&lt;/template&gt;</span>
+    <span class="k">&lt;template</span> if:false={hasError}<span class="k">&gt;</span>
+        <span class="k">&lt;c-account-list</span> accounts={accounts}<span class="k">&gt;&lt;/c-account-list&gt;</span>
+    <span class="k">&lt;/template&gt;</span>
+<span class="k">&lt;/template&gt;</span></code></pre>
+
+        <h2>After: one flat chain</h2>
+        <pre><code><span class="k">&lt;template</span> lwc:if={isLoading}<span class="k">&gt;</span>
+    <span class="k">&lt;lightning-spinner</span> alternative-text="Loading"<span class="k">&gt;&lt;/lightning-spinner&gt;</span>
+<span class="k">&lt;/template&gt;</span>
+<span class="k">&lt;template</span> lwc:elseif={hasError}<span class="k">&gt;</span>
+    <span class="k">&lt;p&gt;</span>Something went wrong.<span class="k">&lt;/p&gt;</span>
+<span class="k">&lt;/template&gt;</span>
+<span class="k">&lt;template</span> lwc:else<span class="k">&gt;</span>
+    <span class="k">&lt;c-account-list</span> accounts={accounts}<span class="k">&gt;&lt;/c-account-list&gt;</span>
+<span class="k">&lt;/template&gt;</span></code></pre>
+        <p>
+          It reads top to bottom like JavaScript: the first true branch renders, and the rest
+          are skipped.
+        </p>
+
+        <h2>Rules to remember</h2>
+        <ul>
+          <li><code>lwc:elseif</code> and <code>lwc:else</code> must sit on the element
+            <strong>directly after</strong> an <code>lwc:if</code> or <code>lwc:elseif</code> sibling.</li>
+          <li><code>lwc:else</code> takes no value.</li>
+          <li>Don't mix <code>lwc:if</code> with <code>if:true</code> or <code>if:false</code> on the same element.</li>
+          <li>The directives work on <code>&lt;template&gt;</code> tags and on regular elements
+            like <code>&lt;div&gt;</code>.</li>
+        </ul>
+
+        <div class="callout">
+          <strong>Hashira's note:</strong> Template conditions take a property, not an expression,
+          so <code>lwc:if={!isLoading}</code> or <code>lwc:if={count &gt; 0}</code> won't work.
+          Put the logic in a getter instead:
+        </div>
+        <pre><code><span class="c">// accountPanel.js</span>
+<span class="k">get</span> hasAccounts() {
+    <span class="k">return</span> <span class="k">this</span>.accounts.length &gt; 0;
+}</code></pre>
+        <pre><code><span class="k">&lt;template</span> lwc:if={hasAccounts}<span class="k">&gt;</span> ... <span class="k">&lt;/template&gt;</span></code></pre>
+
+        <h2>Good to know</h2>
+        <ul>
+          <li><code>if:true</code> and <code>if:false</code> still work, but Salesforce no longer
+            recommends them and may remove them in a future release.</li>
+          <li>Migrating is safe to do one component at a time; nothing else in your code changes.</li>
+          <li>Reference: <a href="https://developer.salesforce.com/docs/platform/lwc/guide/create-conditional.html" target="_blank" rel="noopener">Render DOM Elements Conditionally</a> in the LWC Developer Guide.</li>
+        </ul>
+      </div>
+
+      <footer class="article-footer">
+        <a class="back-link" href="../#tips">All tips</a>
+        <a class="read-more" href="#main">Back to top</a>
+      </footer>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <span>© <span id="year">2026</span> Code Hashira — Salesforce, Sharpened</span>
+      <ul class="footer-links">
+        <li><a href="../#tips">Tips</a></li>
+        <li><a href="../#about">About</a></li>
+      </ul>
+      <p class="disclaimer">
+        Code Hashira is an independent community blog and is not affiliated with, sponsored or
+        endorsed by Salesforce, Inc. Salesforce and related marks are trademarks of Salesforce, Inc.
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

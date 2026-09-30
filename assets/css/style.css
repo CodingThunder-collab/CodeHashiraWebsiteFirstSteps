@@ -389,35 +389,6 @@ section { padding: 56px 0; }
   .about-avatar { width: 80px; height: 80px; font-size: 2rem; }
 }
 
-/* ---------- Newsletter ---------- */
-.subscribe {
-  text-align: center;
-  max-width: 620px;
-  margin: 0 auto;
-}
-.subscribe h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); }
-.subscribe p { color: var(--muted); }
-.subscribe form {
-  display: flex;
-  gap: .5rem;
-  margin-top: 1.25rem;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.subscribe input {
-  flex: 1 1 240px;
-  max-width: 340px;
-  padding: .75rem 1rem;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text);
-  font: inherit;
-}
-.subscribe input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
-.subscribe button { cursor: pointer; font: inherit; font-weight: 600; }
-.form-note { font-size: .85rem; margin-top: .75rem; min-height: 1.4em; }
-
 /* ---------- Footer ---------- */
 .site-footer {
   border-top: 1px solid var(--border);

@@ -29,8 +29,7 @@
       </a>
       <ul class="nav-links">
         <li><a href="#tips">Tips</a></li>
-        <li class="hide-sm"><a href="#about">About</a></li>
-        <li><a href="#subscribe">Subscribe</a></li>
+        <li><a href="#about">About</a></li>
       </ul>
     </nav>
   </header>
@@ -47,19 +46,22 @@
             tip you can read in two minutes and use in your org today.
           </p>
           <div class="btn-row">
-            <a class="btn btn-primary" href="tips/casesafeid-18-character-ids.html">Read the latest tip</a>
+            <a class="btn btn-primary" href="tips/lwc-if-elseif-else.html">Read the latest tip</a>
             <a class="btn btn-ghost" href="#about">Why "Hashira"?</a>
           </div>
         </div>
 
         <div class="hero-art" aria-hidden="true">
-          <pre><code><span class="c">// Tip #001</span>
-<span class="k">CASESAFEID</span>(Id)
-
-<span class="c">// 15 chars → case-sensitive</span>
-001Hs00000AbCdE
-<span class="c">// 18 chars → safe in Excel</span>
-001Hs00000AbCdEIAV</code></pre>
+          <pre><code><span class="c">&lt;!-- Tip #001 · LWC --&gt;</span>
+<span class="k">&lt;template</span> lwc:if={isLoading}<span class="k">&gt;</span>
+    <span class="k">&lt;lightning-spinner&gt;&lt;/lightning-spinner&gt;</span>
+<span class="k">&lt;/template&gt;</span>
+<span class="k">&lt;template</span> lwc:elseif={hasError}<span class="k">&gt;</span>
+    <span class="k">&lt;p&gt;</span>Something went wrong.<span class="k">&lt;/p&gt;</span>
+<span class="k">&lt;/template&gt;</span>
+<span class="k">&lt;template</span> lwc:else<span class="k">&gt;</span>
+    <span class="k">&lt;c-account-list&gt;&lt;/c-account-list&gt;</span>
+<span class="k">&lt;/template&gt;</span></code></pre>
         </div>
       </div>
     </section>
@@ -76,23 +78,27 @@
           <div class="featured-body">
             <div class="meta">
               <span class="form-no">TIP #001</span>
-              <span class="tag">Formulas</span>
+              <span class="tag">LWC</span>
               <time datetime="2026-09-30">30 Sep 2026</time>
               <span>2 min read</span>
             </div>
-            <h3><a href="tips/casesafeid-18-character-ids.html">Stop VLOOKUP mismatches with CASESAFEID()</a></h3>
+            <h3><a href="tips/lwc-if-elseif-else.html">Clean up LWC templates with lwc:if, lwc:elseif and lwc:else</a></h3>
             <p>
-              Salesforce shows 15-character record IDs that are case-sensitive.
-              Excel is not. One tiny formula field gives you the 18-character,
-              case-safe version and saves hours of broken lookups.
+              Stop nesting <code>if:true</code> and <code>if:false</code> templates. LWC's
+              <code>lwc:if</code>, <code>lwc:elseif</code> and <code>lwc:else</code> give you a flat,
+              readable if / else-if / else chain.
             </p>
-            <a class="read-more" href="tips/casesafeid-18-character-ids.html">Read the tip</a>
+            <a class="read-more" href="tips/lwc-if-elseif-else.html">Read the tip</a>
           </div>
           <div class="featured-code" aria-hidden="true">
-            <pre><code><span class="c">/* Formula field: Text */</span>
-<span class="c">/* Label: 18 Digit Id  */</span>
+            <pre><code><span class="c">&lt;!-- Before --&gt;</span>
+<span class="k">&lt;template</span> if:true={isLoading}<span class="k">&gt;</span>
+<span class="k">&lt;template</span> if:false={isLoading}<span class="k">&gt;</span>
 
-<span class="k">CASESAFEID</span>(Id)</code></pre>
+<span class="c">&lt;!-- After --&gt;</span>
+<span class="k">&lt;template</span> lwc:if={isLoading}<span class="k">&gt;</span>
+<span class="k">&lt;template</span> lwc:elseif={hasError}<span class="k">&gt;</span>
+<span class="k">&lt;template</span> lwc:else<span class="k">&gt;</span></code></pre>
           </div>
         </article>
       </div>
@@ -110,11 +116,11 @@
           <article class="card">
             <div class="meta">
               <span class="form-no">#001</span>
-              <span class="tag">Formulas</span>
+              <span class="tag">LWC</span>
             </div>
-            <h3><a href="tips/casesafeid-18-character-ids.html">Stop VLOOKUP mismatches with CASESAFEID()</a></h3>
-            <p>Turn 15-character IDs into 18-character, case-safe IDs with one formula.</p>
-            <a class="read-more" href="tips/casesafeid-18-character-ids.html">Read</a>
+            <h3><a href="tips/lwc-if-elseif-else.html">Clean up LWC templates with lwc:if, lwc:elseif and lwc:else</a></h3>
+            <p>Replace nested if:true / if:false templates with one flat conditional chain.</p>
+            <a class="read-more" href="tips/lwc-if-elseif-else.html">Read</a>
           </article>
 
           <article class="card upcoming">
@@ -123,7 +129,7 @@
               <span class="tag">Coming soon</span>
             </div>
             <h3>Next tip is on the whetstone…</h3>
-            <p>A new Salesforce tip is being sharpened. Subscribe below to catch it.</p>
+            <p>A new Salesforce tip is being sharpened. Check back soon.</p>
           </article>
 
           <article class="card upcoming">
@@ -153,7 +159,7 @@
           <div class="pillar">
             <div class="icon" aria-hidden="true">🛠️</div>
             <h3>Battle-tested</h3>
-            <p>Formulas, Flows, Apex and admin tricks you can use in a real org today.</p>
+            <p>LWC, Apex, Flow and admin tricks you can use in a real org today.</p>
           </div>
           <div class="pillar">
             <div class="icon" aria-hidden="true">🔥</div>
@@ -185,19 +191,6 @@
       </div>
     </section>
 
-    <!-- Subscribe -->
-    <section id="subscribe">
-      <div class="container subscribe">
-        <h2>Get the next tip</h2>
-        <p>One short Salesforce tip, straight to your inbox. No spam, ever.</p>
-        <form>
-          <label for="email" class="skip-link">Email address</label>
-          <input id="email" type="email" name="email" placeholder="you@example.com" required>
-          <button class="btn btn-primary" type="submit">Subscribe</button>
-        </form>
-        <p class="form-note" role="status"></p>
-      </div>
-    </section>
   </main>
 
   <footer class="site-footer">

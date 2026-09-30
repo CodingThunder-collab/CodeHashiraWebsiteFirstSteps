@@ -8,16 +8,16 @@ Plain HTML + CSS, no build step. Open `index.html` in a browser, or host it free
 ## Structure
 
 ```
-index.html                 Home page (hero, latest tip, the dojo, about, subscribe)
+index.html                 Home page (hero, latest tip, the dojo, about)
 tips/<slug>.html           One page per tip
 assets/css/style.css       All styles (light theme)
-assets/js/main.js          Footer year, placeholder subscribe form
+assets/js/main.js          Footer year
 assets/logo.svg            Logo / favicon (original artwork)
 ```
 
 ## Publishing a new tip
 
-1. Copy `tips/casesafeid-18-character-ids.html` to `tips/<new-slug>.html` and edit the content.
+1. Copy `tips/lwc-if-elseif-else.html` to `tips/<new-slug>.html` and edit the content.
 2. In `index.html`, update the "Latest tip" block and replace the next "Coming soon" card in "The dojo".
 
 ## Content and branding notes
