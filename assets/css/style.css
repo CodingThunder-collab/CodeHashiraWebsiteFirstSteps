@@ -149,6 +149,14 @@ pre .k { color: #ef6b5e; }   /* keywords / functions */
 @media (max-width: 640px) {
   .nav-links .hide-sm { display: none; }
   .brand-tag { display: none; }
+  .brand-name { font-size: 1rem; }
+  .nav-links { gap: .9rem; }
+  .nav-links a { font-size: .9rem; white-space: nowrap; }
+}
+
+@media (max-width: 374px) {
+  .brand-mark { width: 30px; height: 30px; }
+  .nav-links { gap: .7rem; }
 }
 
 /* ---------- Hero ---------- */
@@ -168,6 +176,9 @@ pre .k { color: #ef6b5e; }   /* keywords / functions */
   gap: 48px;
   align-items: center;
 }
+/* Let grid children shrink below their content width so the code sample scrolls in its box
+   instead of widening the column past the screen on phones */
+.hero-grid > * { min-width: 0; }
 
 .eyebrow {
   display: inline-flex;
