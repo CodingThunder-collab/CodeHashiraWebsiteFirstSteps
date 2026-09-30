@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Governor Limit Runner — Code Hashira</title>
+  <meta name="description" content="A break-time endless runner: dodge Salesforce governor limits and exceptions with a sleepy dev and a mug of coffee.">
+  <meta property="og:title" content="Governor Limit Runner — Code Hashira">
+  <meta property="og:description" content="Dodge SOQL 101, CPU timeouts and failed deploys in a tiny pixel-art runner.">
+  <link rel="icon" href="../assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/governor-limit-runner.css">
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/governor-limit-runner.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="container nav" aria-label="Main">
+      <a class="brand" href="../">
+        <img class="brand-mark" src="../assets/logo.svg" alt="">
+        <span class="brand-text">
+          <span class="brand-name">Code Hashira</span>
+          <span class="brand-tag">Salesforce, Sharpened</span>
+        </span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../#tips">Tips</a></li>
+        <li class="hide-sm"><a href="governor-limit-runner.html" aria-current="page">Break room</a></li>
+        <li><a href="../#about">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main" class="container">
+    <article class="article">
+      <a class="back-link" href="../">Home</a>
+
+      <header class="article-header">
+        <div class="meta">
+          <span class="form-no">BREAK ROOM</span>
+          <span class="tag">Game</span>
+          <span>2 min per run, if you're lucky</span>
+        </div>
+        <h1>Governor Limit Runner</h1>
+        <p class="lead">
+          A sleepy dev, a mug of coffee and every governor limit in the book. How long can you keep
+          the transaction alive?
+        </p>
+      </header>
+
+      <div class="glr" id="glr">
+        <div class="glr-hud">
+          <div>
+            <span class="glr-score" data-ui="score">0</span>
+            <span class="glr-mult" data-ui="mult"></span>
+            <span class="glr-muted"> CPU ms survived</span>
+          </div>
+          <div class="glr-hud-right">
+            <span class="glr-lives" data-ui="lives" aria-label="Lives">&#9829;&#9829;&#9829;</span>
+            <span class="glr-muted" data-ui="sprint">Sprint 1</span>
+            <span class="glr-shield off" data-ui="shield" title="Coverage shield">&#9670; 75%</span>
+            <span class="glr-muted">Best <span data-ui="best">0</span></span>
+          </div>
+        </div>
+
+        <div class="glr-stage" tabindex="0">
+          <canvas width="480" height="200" aria-label="Game area. Press Space to jump, Down arrow to duck."></canvas>
+
+          <div class="glr-overlay" data-ui="start">
+            <h2>Ready to run?</h2>
+            <p>Dodge every governor limit Salesforce throws at you. New limits unlock as you survive longer.</p>
+            <button class="glr-btn" type="button" data-action="start">Start run</button>
+          </div>
+
+          <div class="glr-overlay" data-ui="paused" hidden>
+            <h2>Paused</h2>
+            <p>Taking a break from your break.</p>
+            <button class="glr-btn" type="button" data-action="resume">Resume</button>
+          </div>
+
+          <div class="glr-overlay" data-ui="over" hidden>
+            <h2 data-ui="over-title">Run over</h2>
+            <code data-ui="over-msg"></code>
+            <p data-ui="over-score"></p>
+            <button class="glr-btn" type="button" data-action="start">Run again</button>
+          </div>
+        </div>
+
+        <div class="glr-controls">
+          <button class="glr-ctl" type="button" data-action="jump">Jump<kbd>Space</kbd></button>
+          <button class="glr-ctl" type="button" data-action="duck">Duck<kbd>&#8595;</kbd></button>
+        </div>
+
+        <div class="glr-collection">
+          <h3>Limits dodged <span data-ui="count"></span></h3>
+          <div class="glr-chips" data-ui="chips"></div>
+        </div>
+      </div>
+
+      <div class="article-body">
+        <h2>How to play</h2>
+        <ul>
+          <li><strong>Jump</strong> with Space, Up or W, or tap the game. <strong>Duck</strong> with Down or S.</li>
+          <li>Ground limits need a jump, flying ones need a duck, and tall ones need a well-timed jump.</li>
+          <li>Grab <strong>coffee</strong> for slow motion and a <strong>75% coverage shield</strong> to survive one hit. You also get three lives.</li>
+          <li>A new sprint starts every 30 seconds, and new limits unlock as you go. Chain dodges for a x2 and x3 combo.</li>
+          <li>The game pauses when you click away. Your best score and collection stay in this browser only.</li>
+        </ul>
+
+        <div class="callout">
+          <strong>Hashira's note:</strong> The game rounds a few corners, but the limits are real.
+          If you've hit one of these in production, the
+          <a href="https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_gov_limits.htm" target="_blank" rel="noopener">Execution Governors and Limits</a>
+          page in the Apex Developer Guide has the exact numbers.
+        </div>
+      </div>
+
+      <footer class="article-footer">
+        <a class="back-link" href="../">Home</a>
+        <a class="read-more" href="../#tips">Read the tips</a>
+      </footer>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <span>© <span id="year">2026</span> Code Hashira — Salesforce, Sharpened</span>
+      <ul class="footer-links">
+        <li><a href="../#tips">Tips</a></li>
+        <li><a href="governor-limit-runner.html">Break room</a></li>
+        <li><a href="../#about">About</a></li>
+      </ul>
+      <p class="disclaimer">
+        Code Hashira is an independent community blog and is not affiliated with, sponsored or
+        endorsed by Salesforce, Inc. Salesforce and related marks are trademarks of Salesforce, Inc.
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
