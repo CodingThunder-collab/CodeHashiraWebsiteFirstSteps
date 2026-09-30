@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CASESAFEID Tip — Code Hashira</title>
+  <meta name="description" content="Salesforce tip: use CASESAFEID(Id) to get 18-character, case-safe record IDs and stop VLOOKUP mismatches in Excel.">
+  <link rel="icon" href="../assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/js/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="container nav" aria-label="Main">
+      <a class="brand" href="../">
+        <img class="brand-mark" src="../assets/logo.svg" alt="">
+        <span class="brand-text">
+          <span class="brand-name">Code Hashira</span>
+          <span class="brand-tag">An IT Farmer</span>
+        </span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../#tips">Tips</a></li>
+        <li class="hide-sm"><a href="../#about">About</a></li>
+        <li class="hide-sm"><a href="../#subscribe">Subscribe</a></li>
+        <li><button class="theme-toggle" type="button" aria-label="Toggle theme">☾</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main" class="container">
+    <article class="article">
+      <a class="back-link" href="../#tips">All tips</a>
+
+      <header class="article-header">
+        <div class="meta">
+          <span class="seed-no">SEED #001</span>
+          <span class="tag">Formulas</span>
+          <time datetime="2026-09-30">30 Sep 2026</time>
+          <span>2 min read</span>
+        </div>
+        <h1>Stop VLOOKUP mismatches with CASESAFEID()</h1>
+        <p class="lead">
+          Exported a report, ran a VLOOKUP in Excel, and got the wrong rows back?
+          The culprit is usually the 15-character record ID.
+        </p>
+      </header>
+
+      <div class="article-body">
+        <div class="tldr">
+          <strong>TL;DR:</strong> Create a Text formula field with <code>CASESAFEID(Id)</code>
+          and use it in your reports and exports instead of the standard 15-character ID.
+        </div>
+
+        <h2>The problem</h2>
+        <p>
+          Salesforce record IDs shown in the UI and in reports are <strong>15 characters</strong>
+          and <strong>case-sensitive</strong>. To Salesforce, these are two different records:
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>15-char ID</th><th>18-char ID</th></tr></thead>
+            <tbody>
+              <tr><td><code>001Hs00000AbCdE</code></td><td><code>001Hs00000AbCdEIAV</code></td></tr>
+              <tr><td><code>001Hs00000abcde</code></td><td><code>001Hs00000abcdeIAA</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Excel's <code>VLOOKUP</code> and <code>MATCH</code> ignore case, so they treat both
+          15-character IDs as the same value and quietly return the wrong record.
+        </p>
+
+        <h2>The fix</h2>
+        <p>
+          The 18-character version adds a 3-character suffix that encodes the upper/lower case
+          of the first 15 characters. That makes it unique even to case-insensitive tools.
+        </p>
+        <ol>
+          <li>Go to <strong>Setup → Object Manager</strong> and pick your object (e.g. Account).</li>
+          <li>Open <strong>Fields &amp; Relationships → New</strong>.</li>
+          <li>Choose <strong>Formula</strong>, label it <em>18 Digit Id</em>, return type <strong>Text</strong>.</li>
+          <li>Enter the formula below, set field-level security, and save.</li>
+        </ol>
+        <pre><code>CASESAFEID(Id)</code></pre>
+        <p>
+          Now add <em>18 Digit Id</em> to your report and use that column for lookups.
+        </p>
+
+        <div class="callout">
+          <strong>Farmer's note:</strong> It works on lookup fields too —
+          <code>CASESAFEID(AccountId)</code> on Contact gives you a case-safe parent ID
+          for matching child rows to parent rows.
+        </div>
+
+        <h2>Good to know</h2>
+        <ul>
+          <li>The API, Data Loader and SOQL already return 18-character IDs.</li>
+          <li>Salesforce accepts both 15- and 18-character IDs in URLs and imports.</li>
+          <li>For a one-off export you can also paste the 15-character IDs into a
+            case-safe converter, but the formula field is set-and-forget.</li>
+        </ul>
+      </div>
+
+      <footer class="article-footer">
+        <a class="back-link" href="../#tips">All tips</a>
+        <a class="read-more" href="../#subscribe">Get the next seed</a>
+      </footer>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <span>© <span id="year">2026</span> Code Hashira — An IT Farmer</span>
+      <ul class="footer-links">
+        <li><a href="../#tips">Tips</a></li>
+        <li><a href="../#about">About</a></li>
+      </ul>
+    </div>
+  </footer>
+</body>
+</html>
