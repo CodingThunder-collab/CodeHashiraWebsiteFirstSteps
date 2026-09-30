@@ -1,7 +1,6 @@
-# Code Hashira — Breath of Code
+# Code Hashira — Salesforce, Sharpened
 
-A blog of sharp, practical Salesforce tips. Each post is one "form" — a single technique
-you can learn in two minutes.
+A community blog of short, practical Salesforce tips for admins, developers and tech enthusiasts.
 
 Plain HTML + CSS, no build step. Open `index.html` in a browser, or host it free on GitHub Pages
 (Settings → Pages → Deploy from branch → root).
@@ -9,15 +8,23 @@ Plain HTML + CSS, no build step. Open `index.html` in a browser, or host it free
 ## Structure
 
 ```
-index.html                 Home page (hero, latest form, the dojo, about, subscribe)
-tips/<slug>.html           One page per form (tip)
-assets/css/style.css       All styles (light + dark theme)
-assets/js/main.js          Theme toggle, footer year, placeholder subscribe form
-assets/logo.svg            Logo / favicon
+index.html                 Home page (hero, latest tip, the dojo, about, subscribe)
+tips/<slug>.html           One page per tip
+assets/css/style.css       All styles (light theme)
+assets/js/main.js          Footer year, placeholder subscribe form
+assets/logo.svg            Logo / favicon (original artwork)
 ```
 
-## Publishing a new form
+## Publishing a new tip
 
 1. Copy `tips/casesafeid-18-character-ids.html` to `tips/<new-slug>.html` and edit the content.
-2. In `index.html`, update the "Latest form" block and replace the next "Coming soon" card in "The dojo".
-3. Form numerals: 壱 1 · 弐 2 · 参 3 · 肆 4 · 伍 5 · 陸 6 · 漆 7 · 捌 8 · 玖 9 · 拾 10
+2. In `index.html`, update the "Latest tip" block and replace the next "Coming soon" card in "The dojo".
+
+## Content and branding notes
+
+- All text, code samples and the logo are original. Fonts (Fraunces, Inter, JetBrains Mono,
+  Noto Serif JP) are served from Google Fonts under the SIL Open Font License.
+- "Hashira" (柱) is used in its everyday Japanese meaning: a structural pillar. Avoid names,
+  characters, move names or artwork from anime, games or other franchises.
+- Salesforce is referenced only to describe the topic. Keep the footer disclaimer, don't use
+  Salesforce logos or the Astro/Codey characters, and link to official docs rather than copying them.

@@ -1,6 +1,6 @@
 /* ==========================================================
-   Code Hashira — Breath of Code
-   Washi paper, sumi ink, crimson blade and gold. Light and dark themes.
+   Code Hashira — Salesforce, Sharpened
+   Washi paper, sumi ink, crimson blade and gold. Light theme.
    ========================================================== */
 
 :root {
@@ -16,7 +16,7 @@
   --flame: #a8761a;         /* hashira gold */
   --code-bg: #1c1917;
   --code-text: #f6f1e7;
-  --pattern: rgba(28, 25, 23, .035);
+  --pattern: rgba(28, 25, 23, .12);
   --shadow: 0 1px 2px rgba(43, 38, 32, .06), 0 8px 24px rgba(43, 38, 32, .06);
   --radius: 14px;
   --max: 1080px;
@@ -24,44 +24,6 @@
   --font-serif: "Fraunces", Georgia, "Times New Roman", serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   color-scheme: light;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #121012;
-    --surface: #1c191b;
-    --surface-2: #262124;
-    --text: #f0e9df;
-    --muted: #a99f95;
-    --border: #372f33;
-    --accent: #ef5a4c;
-    --accent-strong: #ff8579;
-    --accent-soft: #3a1a18;
-    --flame: #e0b24f;
-    --code-bg: #0a090a;
-    --code-text: #f0e9df;
-    --pattern: rgba(255, 255, 255, .025);
-    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .25);
-    color-scheme: dark;
-  }
-}
-
-:root[data-theme="dark"] {
-  --bg: #121012;
-  --surface: #1c191b;
-  --surface-2: #262124;
-  --text: #f0e9df;
-  --muted: #a99f95;
-  --border: #372f33;
-  --accent: #ef5a4c;
-  --accent-strong: #ff8579;
-  --accent-soft: #3a1a18;
-  --flame: #e0b24f;
-  --code-bg: #0a090a;
-  --code-text: #f0e9df;
-  --pattern: rgba(255, 255, 255, .025);
-  --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .25);
-  color-scheme: dark;
 }
 
 /* ---------- Base ---------- */
@@ -184,20 +146,6 @@ pre .k { color: #ef6b5e; }   /* keywords / functions */
 }
 .nav-links a:hover { color: var(--text); }
 
-.theme-toggle {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  color: var(--text);
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: grid;
-  place-items: center;
-  font-size: 1rem;
-}
-.theme-toggle:hover { border-color: var(--accent); }
-
 @media (max-width: 640px) {
   .nav-links .hide-sm { display: none; }
   .brand-tag { display: none; }
@@ -208,12 +156,9 @@ pre .k { color: #ef6b5e; }   /* keywords / functions */
   padding: 72px 0 56px;
   position: relative;
   overflow: hidden;
-  /* Ichimatsu (checkered) pattern, very faint */
-  background-image:
-    linear-gradient(45deg, var(--pattern) 25%, transparent 25%, transparent 75%, var(--pattern) 75%),
-    linear-gradient(45deg, var(--pattern) 25%, transparent 25%, transparent 75%, var(--pattern) 75%);
-  background-size: 48px 48px;
-  background-position: 0 0, 24px 24px;
+  /* Faint dot grid, like graph paper */
+  background-image: radial-gradient(var(--pattern) 1.5px, transparent 1.5px);
+  background-size: 22px 22px;
   border-bottom: 1px solid var(--border);
 }
 
@@ -490,6 +435,11 @@ section { padding: 56px 0; }
 .footer-row a { color: var(--muted); }
 .footer-row a:hover { color: var(--text); }
 .footer-links { display: flex; gap: 1.25rem; list-style: none; margin: 0; padding: 0; }
+.disclaimer {
+  flex-basis: 100%;
+  font-size: .8rem;
+  margin: .5rem 0 0;
+}
 
 /* ---------- Article (single tip) ---------- */
 .article {

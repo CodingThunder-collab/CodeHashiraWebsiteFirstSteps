@@ -1,12 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Code Hashira logo">
-  <!-- Ink tile -->
-  <rect width="64" height="64" rx="16" fill="#1c1917"/>
+  <!-- Paper tile -->
+  <rect x="1" y="1" width="62" height="62" rx="15" fill="#fffcf6" stroke="#1c1917" stroke-width="2"/>
   <!-- Code brackets -->
-  <path d="M20 22l-9 10 9 10M44 22l9 10-9 10" fill="none" stroke="#f6f1e7" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Katana as the slash: crimson blade -->
-  <path d="M41 9L27.5 43" stroke="#ef5a4c" stroke-width="3.5" stroke-linecap="round"/>
-  <!-- Gold tsuba (guard) -->
-  <rect x="21" y="44.5" width="12" height="3.5" rx="1.75" fill="#e0b24f" transform="rotate(-21.7 27 46.25)"/>
-  <!-- Handle -->
-  <path d="M26.4 49L23.6 56" stroke="#f6f1e7" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M19 23l-9 9 9 9M45 23l9 9-9 9" fill="none" stroke="#1c1917" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Katana blade (slightly curved), crimson -->
+  <path d="M44 7Q38.6 23.4 28.9 38.7" fill="none" stroke="#b3261e" stroke-width="4" stroke-linecap="round"/>
+  <!-- Blade edge highlight -->
+  <path d="M43.2 10.5Q38 24 30.6 35.8" fill="none" stroke="#f08a80" stroke-width="1" stroke-linecap="round"/>
+  <!-- Tsuba (guard), gold -->
+  <ellipse cx="28.1" cy="40.5" rx="5.6" ry="1.9" fill="#a8761a" transform="rotate(24.8 28.1 40.5)"/>
+  <!-- Handle, black with wrap diamonds -->
+  <path d="M27.2 42.4L20.6 56.6" stroke="#1c1917" stroke-width="5" stroke-linecap="round"/>
+  <g fill="#fffcf6">
+    <circle cx="25.6" cy="45.9" r=".9"/>
+    <circle cx="24" cy="49.4" r=".9"/>
+    <circle cx="22.4" cy="52.8" r=".9"/>
+  </g>
 </svg>
