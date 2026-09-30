@@ -3,10 +3,10 @@
   <rect x="1" y="1" width="62" height="62" rx="15" fill="#fffcf6" stroke="#1c1917" stroke-width="2"/>
   <!-- Code brackets -->
   <path d="M19 23l-9 9 9 9M45 23l9 9-9 9" fill="none" stroke="#1c1917" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Katana blade (slightly curved), crimson -->
-  <path d="M44 7Q38.6 23.4 28.9 38.7" fill="none" stroke="#b3261e" stroke-width="4" stroke-linecap="round"/>
+  <!-- Katana blade (straight, in line with the handle), crimson -->
+  <path d="M43.3 7.9L28.9 38.7" fill="none" stroke="#b3261e" stroke-width="4" stroke-linecap="round"/>
   <!-- Blade edge highlight -->
-  <path d="M43.2 10.5Q38 24 30.6 35.8" fill="none" stroke="#f08a80" stroke-width="1" stroke-linecap="round"/>
+  <path d="M42.3 11.8L31.4 35.4" fill="none" stroke="#f08a80" stroke-width="1" stroke-linecap="round"/>
   <!-- Tsuba (guard), gold -->
   <ellipse cx="28.1" cy="40.5" rx="5.6" ry="1.9" fill="#a8761a" transform="rotate(24.8 28.1 40.5)"/>
   <!-- Handle, black with wrap diamonds -->
