@@ -37,7 +37,7 @@
       form.addEventListener("submit", function (e) {
         e.preventDefault();
         const note = form.parentElement.querySelector(".form-note");
-        if (note) note.textContent = "Thanks! Subscriptions open soon — check back for the next seed. 🌱";
+        if (note) note.textContent = "Thanks! Subscriptions open soon — keep training. ⚔";
         form.reset();
       });
     }

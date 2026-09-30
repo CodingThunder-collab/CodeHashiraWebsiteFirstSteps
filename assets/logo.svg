@@ -1,15 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Code Hashira logo">
-  <!-- Rounded tile -->
-  <rect width="64" height="64" rx="16" fill="#2f7d4f"/>
-  <!-- Soil line -->
-  <rect x="12" y="46" width="40" height="4" rx="2" fill="#f7f3ea" opacity=".9"/>
-  <!-- Pillar (hashira) -->
-  <rect x="29" y="22" width="6" height="24" rx="1.5" fill="#f7f3ea"/>
-  <!-- Sprout leaves -->
-  <path d="M32 24c-2-8-10-10-14-8 1 6 7 10 14 8z" fill="#bfe3cb"/>
-  <path d="M32 22c2-9 10-12 15-9-1 7-8 11-15 9z" fill="#ffffff"/>
-  <!-- Flame dot -->
-  <circle cx="32" cy="12" r="3" fill="#e0765e"/>
+  <!-- Ink tile -->
+  <rect width="64" height="64" rx="16" fill="#1c1917"/>
   <!-- Code brackets -->
-  <path d="M21 32l-5 5 5 5M43 32l5 5-5 5" fill="none" stroke="#f7f3ea" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M20 22l-9 10 9 10M44 22l9 10-9 10" fill="none" stroke="#f6f1e7" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Katana as the slash: crimson blade -->
+  <path d="M41 9L27.5 43" stroke="#ef5a4c" stroke-width="3.5" stroke-linecap="round"/>
+  <!-- Gold tsuba (guard) -->
+  <rect x="21" y="44.5" width="12" height="3.5" rx="1.75" fill="#e0b24f" transform="rotate(-21.7 27 46.25)"/>
+  <!-- Handle -->
+  <path d="M26.4 49L23.6 56" stroke="#f6f1e7" stroke-width="3.5" stroke-linecap="round"/>
 </svg>

@@ -1,21 +1,22 @@
 /* ==========================================================
-   Code Hashira — An IT Farmer
-   Earthy "field + ink" palette. Light and dark themes.
+   Code Hashira — Breath of Code
+   Washi paper, sumi ink, crimson blade and gold. Light and dark themes.
    ========================================================== */
 
 :root {
-  --bg: #f7f3ea;
-  --surface: #fffdf8;
-  --surface-2: #efe8d8;
-  --text: #2b2620;
-  --muted: #6b6255;
-  --border: #e0d6c2;
-  --accent: #2f7d4f;        /* field green */
-  --accent-strong: #1f5c38;
-  --accent-soft: #e2f0e6;
-  --flame: #c8553d;         /* hashira flame */
-  --code-bg: #2b2620;
-  --code-text: #f7f3ea;
+  --bg: #f6f1e7;            /* washi paper */
+  --surface: #fffcf6;
+  --surface-2: #ece4d4;
+  --text: #1c1917;          /* sumi ink */
+  --muted: #625a50;
+  --border: #ddd2bf;
+  --accent: #b3261e;        /* crimson blade */
+  --accent-strong: #8c1c16;
+  --accent-soft: #f6e0dc;
+  --flame: #a8761a;         /* hashira gold */
+  --code-bg: #1c1917;
+  --code-text: #f6f1e7;
+  --pattern: rgba(28, 25, 23, .035);
   --shadow: 0 1px 2px rgba(43, 38, 32, .06), 0 8px 24px rgba(43, 38, 32, .06);
   --radius: 14px;
   --max: 1080px;
@@ -27,36 +28,38 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #161412;
-    --surface: #1f1c19;
-    --surface-2: #28241f;
-    --text: #efe8dc;
-    --muted: #a89e8e;
-    --border: #3a342d;
-    --accent: #5fbf85;
-    --accent-strong: #86d6a4;
-    --accent-soft: #1f3327;
-    --flame: #e0765e;
-    --code-bg: #0f0e0c;
-    --code-text: #efe8dc;
+    --bg: #121012;
+    --surface: #1c191b;
+    --surface-2: #262124;
+    --text: #f0e9df;
+    --muted: #a99f95;
+    --border: #372f33;
+    --accent: #ef5a4c;
+    --accent-strong: #ff8579;
+    --accent-soft: #3a1a18;
+    --flame: #e0b24f;
+    --code-bg: #0a090a;
+    --code-text: #f0e9df;
+    --pattern: rgba(255, 255, 255, .025);
     --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .25);
     color-scheme: dark;
   }
 }
 
 :root[data-theme="dark"] {
-  --bg: #161412;
-  --surface: #1f1c19;
-  --surface-2: #28241f;
-  --text: #efe8dc;
-  --muted: #a89e8e;
-  --border: #3a342d;
-  --accent: #5fbf85;
-  --accent-strong: #86d6a4;
-  --accent-soft: #1f3327;
-  --flame: #e0765e;
-  --code-bg: #0f0e0c;
-  --code-text: #efe8dc;
+  --bg: #121012;
+  --surface: #1c191b;
+  --surface-2: #262124;
+  --text: #f0e9df;
+  --muted: #a99f95;
+  --border: #372f33;
+  --accent: #ef5a4c;
+  --accent-strong: #ff8579;
+  --accent-soft: #3a1a18;
+  --flame: #e0b24f;
+  --code-bg: #0a090a;
+  --code-text: #f0e9df;
+  --pattern: rgba(255, 255, 255, .025);
   --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .25);
   color-scheme: dark;
 }
@@ -106,6 +109,8 @@ pre {
   line-height: 1.6;
 }
 pre code { background: none; padding: 0; color: inherit; }
+pre .c { color: #9a8f84; }   /* comments */
+pre .k { color: #ef6b5e; }   /* keywords / functions */
 
 .container {
   width: 100%;
@@ -203,6 +208,13 @@ pre code { background: none; padding: 0; color: inherit; }
   padding: 72px 0 56px;
   position: relative;
   overflow: hidden;
+  /* Ichimatsu (checkered) pattern, very faint */
+  background-image:
+    linear-gradient(45deg, var(--pattern) 25%, transparent 25%, transparent 75%, var(--pattern) 75%),
+    linear-gradient(45deg, var(--pattern) 25%, transparent 25%, transparent 75%, var(--pattern) 75%);
+  background-size: 48px 48px;
+  background-position: 0 0, 24px 24px;
+  border-bottom: 1px solid var(--border);
 }
 
 .hero-grid {
@@ -263,12 +275,8 @@ pre code { background: none; padding: 0; color: inherit; }
 .btn:hover { transform: translateY(-1px); }
 .btn-primary { background: var(--accent); color: #fff; }
 .btn-primary:hover { background: var(--accent-strong); color: #fff; }
-:root[data-theme="dark"] .btn-primary,
-:root[data-theme="dark"] .btn-primary:hover { color: #0f0e0c; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .btn-primary,
-  :root:not([data-theme="light"]) .btn-primary:hover { color: #0f0e0c; }
-}
+
+
 .btn-ghost { border-color: var(--border); color: var(--text); background: var(--surface); }
 .btn-ghost:hover { border-color: var(--accent); color: var(--text); }
 
@@ -379,7 +387,7 @@ section { padding: 56px 0; }
 .card.upcoming:hover { transform: none; border-color: var(--border); }
 .card.upcoming h3 { color: var(--muted); }
 
-.seed-no {
+.form-no {
   font-family: var(--font-mono);
   font-size: .8rem;
   color: var(--flame);
@@ -421,10 +429,11 @@ section { padding: 56px 0; }
   height: 120px;
   border-radius: 50%;
   background: var(--accent);
+  box-shadow: 0 0 0 4px var(--surface-2), 0 0 0 6px var(--flame);
   display: grid;
   place-items: center;
-  font-family: var(--font-serif);
-  font-size: 3rem;
+  font-family: "Noto Serif JP", var(--font-serif);
+  font-size: 3.4rem;
   color: #fff;
 }
 .about h2 { font-size: 1.8rem; }
