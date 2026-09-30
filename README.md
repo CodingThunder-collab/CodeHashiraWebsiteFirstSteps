@@ -10,8 +10,11 @@ Plain HTML + CSS, no build step. Open `index.html` in a browser, or host it free
 ```
 index.html                 Home page (hero, latest tip, the dojo, about)
 tips/<slug>.html           One page per tip
-assets/css/style.css       All styles (light theme)
+games/governor-limit-runner.html   Break-room game page
+assets/css/style.css       Site styles (light theme)
+assets/css/governor-limit-runner.css   Game panel styles
 assets/js/main.js          Footer year
+assets/js/governor-limit-runner.js     Game engine (canvas, no dependencies)
 assets/logo.svg            Logo / favicon (original artwork)
 ```
 
@@ -22,8 +25,8 @@ assets/logo.svg            Logo / favicon (original artwork)
 
 ## Content and branding notes
 
-- All text, code samples and the logo are original. Fonts (Fraunces, Inter, JetBrains Mono,
-  Noto Serif JP) are served from Google Fonts under the SIL Open Font License.
+- All text, code samples, the logo and the game's pixel art are original. Fonts (Fraunces, Inter,
+  JetBrains Mono, Noto Serif JP, Silkscreen) are served from Google Fonts under the SIL Open Font License.
 - "Hashira" (柱) is used in its everyday Japanese meaning: a structural pillar. Avoid names,
   characters, move names or artwork from anime, games or other franchises.
 - Salesforce is referenced only to describe the topic. Keep the footer disclaimer, don't use
