@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; worker-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Chess Dojo — Code Hashira</title>
+  <meta name="description" content="Play 4-minute chess on Code Hashira: two players on one device, or against a bot at Easy, Medium or Grand Master level.">
+  <link rel="icon" href="../assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="../assets/fonts/chess-pieces.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/chess.css">
+  <script src="../assets/js/main.js"></script>
+  <script type="module" src="../assets/js/chess/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="container nav" aria-label="Main">
+      <a class="brand" href="../">
+        <img class="brand-mark" src="../assets/logo.svg" alt="">
+        <span class="brand-text">
+          <span class="brand-name">Code Hashira</span>
+          <span class="brand-tag">Salesforce, Sharpened</span>
+        </span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../#tips">Tips</a></li>
+        <li><a href="../#break-room" aria-current="page">Break room</a></li>
+        <li><a href="../#about">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main" class="container chess-page">
+    <header class="chess-head">
+      <a class="back-link" href="../#break-room">Break room</a>
+      <span class="eyebrow">Break room · Game</span>
+      <h1>Chess Dojo</h1>
+      <p class="lead">Four minutes on each clock. Play a friend on this device, or test yourself against the bot.</p>
+    </header>
+
+    <div class="chess-layout">
+      <section class="board-col" aria-label="Chess board">
+        <div class="player-bar" id="bar-top">
+          <span class="player-name" id="name-top">Black</span>
+          <span class="captured" id="cap-top" aria-label="Captured pieces"></span>
+          <span class="clock" id="clock-top" role="timer" aria-live="off">4:00</span>
+        </div>
+
+        <div class="board-wrap">
+          <div class="board" id="board" role="grid" aria-label="Chess board"></div>
+
+          <div class="promo" id="promo" hidden>
+            <p>Promote to</p>
+            <div class="promo-choices" id="promo-choices"></div>
+          </div>
+
+          <div class="result" id="result" hidden>
+            <p class="result-title" id="result-title"></p>
+            <p class="result-reason" id="result-reason"></p>
+            <button class="btn btn-primary" type="button" id="btn-again">Play again</button>
+          </div>
+        </div>
+
+        <div class="player-bar" id="bar-bottom">
+          <span class="player-name" id="name-bottom">White</span>
+          <span class="captured" id="cap-bottom" aria-label="Captured pieces"></span>
+          <span class="clock" id="clock-bottom" role="timer" aria-live="off">4:00</span>
+        </div>
+      </section>
+
+      <aside class="side-col">
+        <section class="panel" id="setup" aria-labelledby="setup-title">
+          <h2 id="setup-title">New game</h2>
+
+          <fieldset class="choice">
+            <legend>Mode</legend>
+            <div class="seg" role="radiogroup">
+              <label><input type="radio" name="mode" value="bot" id="mode-bot" checked><span>vs Bot</span></label>
+              <label><input type="radio" name="mode" value="pvp" id="mode-pvp"><span>2 Players</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="choice" id="level-field">
+            <legend>Bot level</legend>
+            <div class="seg" role="radiogroup">
+              <label><input type="radio" name="level" value="easy" id="level-easy"><span>Easy</span></label>
+              <label><input type="radio" name="level" value="medium" id="level-medium" checked><span>Medium</span></label>
+              <label><input type="radio" name="level" value="master" id="level-master"><span>Grand Master</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="choice" id="color-field">
+            <legend>You play</legend>
+            <div class="seg" role="radiogroup">
+              <label><input type="radio" name="color" value="w" id="color-w" checked><span>White</span></label>
+              <label><input type="radio" name="color" value="b" id="color-b"><span>Black</span></label>
+              <label><input type="radio" name="color" value="random" id="color-random"><span>Random</span></label>
+            </div>
+          </fieldset>
+
+          <p class="time-note">Time control: <strong>4 minutes</strong> each. Clocks start after White's first move.</p>
+          <button class="btn btn-primary btn-block" type="button" id="btn-start">Start game</button>
+        </section>
+
+        <section class="panel" id="game-panel" hidden aria-labelledby="status">
+          <p class="status" id="status" aria-live="polite">White to move</p>
+          <ol class="moves" id="moves" aria-label="Move list"></ol>
+          <div class="controls">
+            <button class="btn btn-ghost" type="button" id="btn-undo">Undo</button>
+            <button class="btn btn-ghost" type="button" id="btn-flip">Flip board</button>
+            <button class="btn btn-ghost" type="button" id="btn-resign">Resign</button>
+            <button class="btn btn-ghost" type="button" id="btn-new">New game</button>
+          </div>
+          <div class="confirm" id="confirm-resign" hidden>
+            <p id="confirm-text">Resign this game?</p>
+            <div class="controls">
+              <button class="btn btn-primary" type="button" id="btn-resign-yes">Yes, resign</button>
+              <button class="btn btn-ghost" type="button" id="btn-resign-no">Keep playing</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel how" aria-labelledby="how-title">
+          <h2 id="how-title">How to play</h2>
+          <ul>
+            <li>Click a piece, then click a highlighted square to move.</li>
+            <li>Run out of time and you lose, unless your opponent can't checkmate.</li>
+            <li>In 2-player mode the board stays put; use <em>Flip board</em> any time.</li>
+          </ul>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <span>© <span id="year">2026</span> Code Hashira — Salesforce, Sharpened</span>
+      <ul class="footer-links">
+        <li><a href="../#tips">Tips</a></li>
+        <li><a href="../#break-room">Break room</a></li>
+        <li><a href="../#about">About</a></li>
+      </ul>
+      <p class="disclaimer">
+        Chess rules powered by <a href="https://github.com/jhlywa/chess.js" target="_blank" rel="noopener">chess.js</a> (BSD-2-Clause).
+        Code Hashira is an independent community blog and is not affiliated with, sponsored or
+        endorsed by Salesforce, Inc. Salesforce and related marks are trademarks of Salesforce, Inc.
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
